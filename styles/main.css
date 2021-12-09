@@ -1,0 +1,104 @@
+:root {
+  --radio-width: 60px;
+  --radio-border-width: 4px;
+  --radio-inset: 12px;
+  --radio-color: #0a3d62;
+  --radio-border-color: #0a3d62;
+  --check-border-width: 6px;
+  --form-color: #eee;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 200px;
+  font-family: "Nanum Gothic", sans-serif;
+  color: var(--radio-color);
+}
+
+form {
+  background-color: var(--form-color);
+  padding: 2rem 3rem;
+  max-width: 700px;
+}
+
+fieldset {
+  margin: 10vh;
+  border: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: min-content max-content;
+  align-items: center;
+  font-size: calc(var(--radio-width) * 0.75);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: var(--radio-width);
+  height: var(--radio-width);
+  border: var(--radio-border-width) solid var(--radio-border-color);
+
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+input[type="radio"] {
+  border-radius: 50%;
+}
+
+input[type="checkbox"] {
+  border-radius: 6px;
+  transition: background-color 200ms;
+}
+
+input[type="checkbox"]::after,
+input[type="radio"]::after {
+  content: "";
+  display: block;
+
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 1;
+}
+
+input[type="checkbox"]::after {
+  width: calc(var(--radio-width) * 0.3);
+  height: calc(var(--radio-width) * 0.6);
+  border-right: var(--check-border-width) solid var(--form-color);
+  border-bottom: var(--check-border-width) solid var(--form-color);
+
+  transform: translateY(calc(var(--radio-width) * -0.1)) rotate(38deg);
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+input[type="radio"]::after {
+  width: calc(var(--radio-width) - 2 * var(--radio-inset));
+  height: calc(var(--radio-width) - 2 * var(--radio-inset));
+  background-color: var(--radio-color);
+  border-radius: 50%;
+  transform: scale(0);
+
+  transition: transform 200ms;
+}
+
+input[type="radio"]:checked::after {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--radio-color);
+}
+
+input[type="checkbox"]:checked::after {
+  opacity: 1;
+}
